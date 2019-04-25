@@ -8,6 +8,13 @@ dev
 
 -   \[Short description of non-trivial change.\]
 
+2.22.0 (2019-04-25)
+-------------------
+
+**Dependencies**
+
+- Requests now supports urllib3 v1.25.
+
 2.21.0 (2018-12-10)
 -------------------
 
