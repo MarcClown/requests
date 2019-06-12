@@ -83,12 +83,6 @@ def merge_hooks(request_hooks, session_hooks, dict_class=OrderedDict):
     This is necessary because when request_hooks == {'response': []}, the
     merge breaks Session hooks entirely.
     """
-    if session_hooks is None or session_hooks.get('response') == []:
-        return request_hooks
-
-    if request_hooks is None or request_hooks.get('response') == []:
-        return session_hooks
-
     return merge_setting(request_hooks, session_hooks, dict_class)
 
 
@@ -642,6 +636,10 @@ class Session(SessionRedirectMixin):
         # Start time (approximately) of the request
         start = preferred_clock()
 
+        # Pre-Request manipulation hooks -- allow user to interact with PreparedRequest 
+        # (log/modify/...) when the "redirect" feature is set to true 
+        dispatch_hook('pre-request', hooks, request, **kwargs)
+        
         # Send the request
         r = adapter.send(request, **kwargs)
 
