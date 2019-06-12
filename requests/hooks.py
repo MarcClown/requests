@@ -11,13 +11,11 @@ Available hooks:
 ``response``:
     The response generated from a Request.
 """
-HOOKS = ['response']
+HOOKS = ['response', 'pre-request']
 
 
 def default_hooks():
     return {event: [] for event in HOOKS}
-
-# TODO: response is the only one
 
 
 def dispatch_hook(key, hooks, hook_data, **kwargs):
